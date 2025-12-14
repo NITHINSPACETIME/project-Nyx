@@ -187,12 +187,15 @@ export function MessageInput({ conversationId }: MessageInputProps) {
     loadKey();
   }, [conversationId, currentUser.id, currentUser.blockedUsers]);
 
+
   const handleSend = async () => {
     if ((!message.trim() && !attachment) || !recipientKey || isBlocked) return;
     setIsSending(true);
 
-    const mySecretKey = localStorage.getItem("Nyx Key");
+    const mySecretKey = localStorage.getItem("secretKey"); 
+    
     if (!mySecretKey) {
+      console.error("No private key found in storage"); 
       setIsSending(false);
       return;
     }
