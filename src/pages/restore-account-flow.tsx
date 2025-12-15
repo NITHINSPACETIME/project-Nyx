@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { ArrowLeft, Loader2, KeyRound } from "lucide-react";
 import { Button } from "../components/ui/button";
@@ -46,10 +45,12 @@ export function RestoreAccountFlow({
     } else {
       const wordCount = cleanInput.split(/\s+/).length;
       if (wordCount === 12) {
-        const keys = generateKeysFromPhrase(cleanInput);
+       
+        const keys = await generateKeysFromPhrase(cleanInput);
         if (keys) {
           isValid = true;
-          sessionId = deriveSessionIdFromPhrase(cleanInput);
+          
+          sessionId = await deriveSessionIdFromPhrase(cleanInput);
         }
       }
     }
